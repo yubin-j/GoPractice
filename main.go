@@ -3,10 +3,11 @@ package main
 import "fmt"
 
 /*
-structure에 기반이 되는 struct
+structure를 기반으로 하는 struct
 javascript의 객체와 비슷한 기능을 한다.
 각 요소별로 타입을 각각 명시하여 다양한 데이터 타입의 변수들을 담을 수 있다.
 struct는 javascript의 constructor와 같은 함수가 없어서 원하면 직접 생성하여 사용해야 한다.
+이 말인 즉슨 struct에는 메소드를 포함시키는 것도 가능하다는 것이다.
 */
 type person struct {
 	name    string
