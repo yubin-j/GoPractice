@@ -13,5 +13,5 @@ func main() {
 
 	*/
 	account := accounts.NewAccount("yubin")
-	fmt.Println(account)
+	fmt.Println(account) //받아온 값이 참조값을 바라보는 값을 받아오게 되어 출력형식에 이를 알려주는 &가 붙는다.
 }
