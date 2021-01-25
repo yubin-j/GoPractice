@@ -9,8 +9,13 @@ type의 경우 메서드를 가질 수 있다.
 */
 type Dictionary map[string]string
 
-var errNotFound = errors.New("Not Found")
-var errWordExists = errors.New("Word Exists")
+//아래와 같은 구문으로 var를 한번만 사용하여 선언을 할 수 있다.
+var (
+	errNotFound   = errors.New("Not Found")
+	errWordExists = errors.New("Word Exists")
+	errCantUpdate = errors.New("Cant update non-existing word")
+	errCantDelete = errors.New("Cant delete non-existing word")
+)
 
 /*
 Search struct의 메소드와 동일하게 리시버를 받아줘야 한다.
@@ -36,6 +41,34 @@ func (d Dictionary) Add(word, def string) error {
 		d[word] = def
 	case nil:
 		return errWordExists
+	}
+	return nil
+}
+
+/*
+Update a word definition
+*/
+func (d Dictionary) Update(word, def string) error {
+	_, err := d.Search(word)
+	switch err {
+	case nil:
+		d[word] = def
+	case errNotFound:
+		return errCantUpdate
+	}
+	return nil
+}
+
+/*
+Delete a word definition
+*/
+func (d Dictionary) Delete(word string) error {
+	_, err := d.Search(word)
+	switch err {
+	case nil:
+		delete(d, word)
+	case errNotFound:
+		return errCantDelete
 	}
 	return nil
 }
